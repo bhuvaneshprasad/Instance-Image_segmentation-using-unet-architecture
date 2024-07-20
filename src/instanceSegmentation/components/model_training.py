@@ -117,8 +117,6 @@ class ModelTraining:
         model.save(path)
 
     def get_dataset(self):
-        np.random.seed(42)
-        tf.random.set_seed(42)
         
         dataset_path = self.config.dataset_path
         
@@ -129,7 +127,7 @@ class ModelTraining:
         train_dataset = self.tf_dataset(train_x, train_y, batch=self.config.params_batch_size)
         valid_dataset = self.tf_dataset(valid_x, valid_y, batch=self.config.params_batch_size)
         
-        return train_dataset, valid_dataset
+        return train_dataset, valid_dataset, test_x, test_y
     
     def train(self):
         """
@@ -138,7 +136,7 @@ class ModelTraining:
         model_path = self.config.trained_model_path
         csv_path = self.config.csv_path
         
-        train_dataset, valid_dataset = self.get_dataset()
+        train_dataset, valid_dataset, test_x, test_y = self.get_dataset()
         
         callbacks = [
             ModelCheckpoint(model_path, verbose=1, save_best_only=True),

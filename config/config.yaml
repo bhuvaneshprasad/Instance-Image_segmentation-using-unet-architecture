@@ -14,3 +14,7 @@ model_training:
   trained_model_path: artifacts/model_training/model.keras
   colormap_path: artifacts/data_ingestion/instance-level_human_parsing/instance-level_human_parsing/human_colormap.mat
   csv_path: artifacts/model_training/training_log_data.csv
+
+model_evaluation:
+  root_dir: artifacts/model_evaluation
+  score_csv_path: artifacts/model_evaluation

@@ -35,3 +35,16 @@ class ModelTrainingConfig:
     params_epochs: int
     dataset_path: Path
     csv_path: Path
+
+@dataclass(frozen=True)
+class ModelEvaluationConfig:
+    root_dir: Path
+    score_csv_path: Path
+    trained_model_path: Path
+    training_data_path: Path
+    params_image_height: int
+    params_image_width: int
+    colormap_path: Path
+    dataset_path: Path
+    params_classes: list
+    
