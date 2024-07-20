@@ -8,3 +8,9 @@ data_ingestion:
 model_building:
   root_dir: artifacts/model_building
   updated_base_model_path: artifacts/model_building/base_model_updated.keras
+
+model_training:
+  root_dir: artifacts/model_training
+  trained_model_path: artifacts/model_training/model.keras
+  colormap_path: artifacts/data_ingestion/instance-level_human_parsing/human_colormap.mat
+  csv_path: artifacts/model_training/training_log_data.path

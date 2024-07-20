@@ -1,7 +1,7 @@
 from pathlib import Path
 from instanceSegmentation.constants import CONFIG_FILE_PATH, PARAMS_FILE_PATH
 from instanceSegmentation.utils.common import read_yaml, create_directories
-from instanceSegmentation.entity.config_entity import DataIngestionConfig, ModelBuildingConfig
+from instanceSegmentation.entity.config_entity import DataIngestionConfig, ModelBuildingConfig, ModelTrainingConfig
 
 class ConfigurationManager:
     """
@@ -67,3 +67,25 @@ class ConfigurationManager:
         )
         
         return model_building_config
+    
+    def get_model_training_config(self) -> ModelTrainingConfig:
+        config = self.config.model_training
+        model_building = self.config.model_building
+        data_ingestion = self.config.data_ingestion
+        
+        model_training_config = ModelTrainingConfig(
+            root_dir=Path(config.root_dir),
+            updated_base_model_path=Path(model_building.updated_base_model_path),
+            trained_model_path=Path(config.trained_model_path),
+            colormap_path=Path(config.colormap_path),
+            params_classes=self.params.CLASSES,
+            params_image_height=self.params.IMAGE_HEIGHT,
+            params_image_width=self.params.IMAGE_WIDTH,
+            params_num_classes=self.params.NUM_CLASSES,
+            params_batch_size=self.params.BATCH_SIZE,
+            params_epochs=self.params.EPOCHS,
+            dataset_path=data_ingestion.root_dir,
+            csv_path=Path(config.csv_path)
+        )
+        
+        return model_training_config

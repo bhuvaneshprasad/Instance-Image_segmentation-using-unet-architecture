@@ -20,3 +20,18 @@ class ModelBuildingConfig:
     params_weights: str
     params_classes: list
     params_num_classes: int
+
+@dataclass(frozen=True)
+class ModelTrainingConfig:
+    root_dir: Path
+    updated_base_model_path: Path
+    trained_model_path: Path
+    colormap_path: Path
+    params_classes: list
+    params_image_height: int
+    params_image_width: int
+    params_num_classes: int
+    params_batch_size: int
+    params_epochs: int
+    dataset_path: Path
+    csv_path: Path
