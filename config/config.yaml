@@ -1,1 +1,6 @@
 artifacts_root: artifacts
+
+data_ingestion:
+  root_dir: artifacts/data_ingestion
+  source_url: https://www.kaggle.com/datasets/tentotheminus9/seti-data
+  data_dir: artifacts/data_ingestion
