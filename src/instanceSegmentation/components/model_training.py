@@ -1,5 +1,6 @@
 import os
 from pathlib import Path
+from instanceSegmentation.utils.common import create_directories
 import tensorflow as tf
 from tensorflow.keras.callbacks import ModelCheckpoint, ReduceLROnPlateau, EarlyStopping, CSVLogger
 from sklearn.model_selection import train_test_split
@@ -26,10 +27,7 @@ class ModelTraining:
             config (ModelTrainingConfig): Configuration for the model training process.
         """
         self.config = config
-    
-    def create_dir(self, path):
-        if not os.path.exists(path):
-            os.makedirs(path)
+        create_directories([config.root_dir])
 
     def load_dataset(self, path, split=0.2):
         train_x = sorted(glob(os.path.join(path, "Training", "Images", "*")))
@@ -118,18 +116,11 @@ class ModelTraining:
         """
         model.save(path)
 
-    
-    def train(self):
-        """
-        Train the model on the training dataset and validate on the validation dataset.
-        """
+    def get_dataset(self):
         np.random.seed(42)
         tf.random.set_seed(42)
         
         dataset_path = self.config.dataset_path
-        
-        model_path = self.config.trained_model_path
-        csv_path = self.config.csv_path
         
         (train_x, train_y), (valid_x, valid_y), (test_x, test_y) = self.load_dataset(dataset_path)
         
@@ -137,6 +128,17 @@ class ModelTraining:
 
         train_dataset = self.tf_dataset(train_x, train_y, batch=self.config.params_batch_size)
         valid_dataset = self.tf_dataset(valid_x, valid_y, batch=self.config.params_batch_size)
+        
+        return train_dataset, valid_dataset
+    
+    def train(self):
+        """
+        Train the model on the training dataset and validate on the validation dataset.
+        """
+        model_path = self.config.trained_model_path
+        csv_path = self.config.csv_path
+        
+        train_dataset, valid_dataset = self.get_dataset()
         
         callbacks = [
             ModelCheckpoint(model_path, verbose=1, save_best_only=True),

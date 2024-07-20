@@ -84,7 +84,7 @@ class ConfigurationManager:
             params_num_classes=self.params.NUM_CLASSES,
             params_batch_size=self.params.BATCH_SIZE,
             params_epochs=self.params.EPOCHS,
-            dataset_path=data_ingestion.root_dir,
+            dataset_path=data_ingestion.data_dir,
             csv_path=Path(config.csv_path)
         )
         

@@ -3,7 +3,7 @@ artifacts_root: artifacts
 data_ingestion:
   root_dir: artifacts/data_ingestion
   source_url: https://www.kaggle.com/datasets/tentotheminus9/seti-data
-  data_dir: artifacts/data_ingestion
+  data_dir: artifacts/data_ingestion/instance-level_human_parsing/instance-level_human_parsing
 
 model_building:
   root_dir: artifacts/model_building
@@ -12,5 +12,5 @@ model_building:
 model_training:
   root_dir: artifacts/model_training
   trained_model_path: artifacts/model_training/model.keras
-  colormap_path: artifacts/data_ingestion/instance-level_human_parsing/human_colormap.mat
-  csv_path: artifacts/model_training/training_log_data.path
+  colormap_path: artifacts/data_ingestion/instance-level_human_parsing/instance-level_human_parsing/human_colormap.mat
+  csv_path: artifacts/model_training/training_log_data.csv
